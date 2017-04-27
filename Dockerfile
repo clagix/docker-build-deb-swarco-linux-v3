@@ -35,10 +35,15 @@ RUN useradd -ms /bin/bash builduser &&                  \
             texinfo                                     \
             xz-utils                                    \
             cmake                                       \
+            wget                                        \
+            cpio                                        \
+            python                                      \
+            unzip                                       \
+            rsync                                       \
+            bc                                          \
             &&                                          \
     apt-get clean &&                                    \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 
 COPY docker_build.sh /home/builduser
 USER builduser
