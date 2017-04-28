@@ -8,7 +8,19 @@ git clone https://github.com/swarco/swarco-linux-v3
 cd swarco-linux-v3
 make swarco_linux_v3_ccm2200_defconfig
 
+# disable toolchain locale support
+# sed -i -e "s/BR2_ENABLE_LOCALE=y/# BR2_ENABLE_LOCALE is not set/g" .config
+# grep ^BR2_ENABLE_LOCALE .config
+# make oldconfig
+# grep ^BR2_ENABLE_LOCALE .config
+# locale -a
+
+# substitute  grep -q -i utf8 in  grep -q -i utf-\\\?8
+sed -i -e 's/utf8/utf-\\\\\\?8/g' support/dependencies/dependencies.sh
+cat support/dependencies/dependencies.sh
+
 make
+
 
 
 (

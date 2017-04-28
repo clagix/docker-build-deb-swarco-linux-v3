@@ -2,7 +2,7 @@
 FROM debian:jessie
 MAINTAINER Guido Classen <clagix@gmail.com>
 
-LABEL description="Automated Build for SWARCO Embedded Linux V2 operating system"
+LABEL description="Automated Build for SWARCO Embedded Linux V3 operating system"
 
 #ENV DEBIAN_FRONTEND noninteractive
 
@@ -41,9 +41,26 @@ RUN useradd -ms /bin/bash builduser &&                  \
             unzip                                       \
             rsync                                       \
             bc                                          \
+            locales                                     \
+            file                                        \
             &&                                          \
     apt-get clean &&                                    \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#    locale-gen en_US.utf8 &&                           \
+#    /usr/sbin/update-locale LANG=en_US.utf8 &&         \
+
+# install locales support
+# 2017-04-28 gc: C.UTF-8 currently not work for compiling buildroot
+
+#  apt-get update -qq && apt-get install -y locales -qq && locale-gen en_US.utf8 en_us && dpkg-reconfigure locales && dpkg-reconfigure locales && locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
+# ENV LANG en_US.utf8
+# ENV LANGUAGE en_US.utf8
+# ENV LC_ALL en_US.utf8
+ENV LANG C.UTF-8
+ENV LANGUAGE C.UTF-8
+ENV LC_ALL C.UTF-8
+
 
 COPY docker_build.sh /home/builduser
 USER builduser
