@@ -43,6 +43,7 @@ RUN useradd -ms /bin/bash builduser &&                  \
             bc                                          \
             locales                                     \
             file                                        \
+            uuid-dev                                    \
             &&                                          \
     apt-get clean &&                                    \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
