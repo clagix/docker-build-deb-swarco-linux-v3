@@ -55,7 +55,6 @@ mkdir -p swarco-linux-v3/output
 mv host swarco-linux-v3/output/
 
 arm-buildroot-linux-gnueabi-gcc -o hello hello.c        
-arm-linux-uclibc-gcc -o hello hello.c
 ls -l
 
 echo Oki Doki
