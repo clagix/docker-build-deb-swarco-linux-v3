@@ -6,6 +6,8 @@ id
 git clone https://github.com/swarco/swarco-linux-v3
 
 cd swarco-linux-v3
+git clone https://github.com/swarco/swarco-linux-v3-dl output
+
 make swarco_linux_v3_ccm2200_defconfig
 
 # disable toolchain locale support
