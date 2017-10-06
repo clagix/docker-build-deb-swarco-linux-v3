@@ -25,7 +25,7 @@ make toolchain
 
 #test cross compiler
 
-PATH=$PATH:$PWD/swarco-linux-v3/output/host/usr/bin/
+PATH=$PATH:$PWD/output/host/usr/bin/
 export PATH
 
 echo -e '#include <stdio.h>\nint main() { printf("Hello\\n"); }' >hello.c
