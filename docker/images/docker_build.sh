@@ -13,6 +13,37 @@ make
     tar cJf ../../../swarco-linux-v3_images.tar.bz2 .
 )
 
+# cleanup build dir
+(
+    cd output/build
+    for dir in *
+    do
+        if [ -d "$dir" ]; then
+            echo "cleanup directory $dir"
+            rm -rf "$dir"
+            mkdir "$dir"
+            # fake stamp files, so buildroot don't try to rebuild this
+            # directory
+            (cd "$dir"; touch .applied_patches_list         \
+                              .br_filelist_after            \
+                              .br_filelist_before           \
+                              .gitignore                    \
+                              .config                       \
+                              .stamp_built                  \
+                              .stamp_configured             \
+                              .stamp_downloaded             \
+                              .stamp_extracted              \
+                              .stamp_patched                \
+                              .stamp_staging_installed      \
+                              .stamp_kconfig_fixup_done     \
+                              .stamp_host_installed         \
+                              .stamp_target_installed )         
+        fi
+    done
+    mkdir -p linux-v3.4.113-ccm2200/arch/arm/boot/
+    cp -p  ../images/uImage linux-v3.4.113-ccm2200/arch/arm/boot/uImage
+)
+
 #(
     #    tar cJf ../swarco-linux-v2_staging_dir.tar.bz2 buildroot/buildroot-2.0/build_arm/staging_dir
 #)
