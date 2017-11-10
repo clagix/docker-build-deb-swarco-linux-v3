@@ -6,6 +6,14 @@ id
 
 cd swarco-linux-v3
 
+# "clone" repository swarco-linux-v3-dl in exisiting directory "output"
+(
+    cd output
+    git init
+    git remote add origin https://github.com/swarco/swarco-linux-v3-dl
+    git pull --depth 1 origin master
+)
+
 make
 
 (
@@ -13,7 +21,7 @@ make
     tar cJf ../../../swarco-linux-v3_images.tar.bz2 .
 )
 
-# cleanup build dir
+# cleanup build dir so it will not be part of the created Docker image
 (
     cd output/build
     for dir in *
@@ -43,6 +51,9 @@ make
     mkdir -p linux-v3.4.113-ccm2200/arch/arm/boot/
     cp -p  ../images/uImage linux-v3.4.113-ccm2200/arch/arm/boot/uImage
 )
+
+# remove download directory, so it will not be part of the created Docker image
+rm -rf output/dl noutput/.git
 
 #(
     #    tar cJf ../swarco-linux-v2_staging_dir.tar.bz2 buildroot/buildroot-2.0/build_arm/staging_dir

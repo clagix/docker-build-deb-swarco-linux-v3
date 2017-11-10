@@ -3,10 +3,13 @@
 set -e -x
 id
 
-git clone https://github.com/swarco/swarco-linux-v3
+# make shallow clone
+git clone --depth 1 https://github.com/swarco/swarco-linux-v3
 
 cd swarco-linux-v3
-git clone https://github.com/swarco/swarco-linux-v3-dl output
+
+# make shallow clone
+git clone --depth 1 https://github.com/swarco/swarco-linux-v3-dl output
 
 make swarco_linux_v3_ccm2200_defconfig
 
@@ -23,7 +26,7 @@ cat support/dependencies/dependencies.sh
 
 make toolchain
 
-# cleanup build dir
+# cleanup build dir so it will not be part of the created Docker image
 (
     cd output/build
     for dir in *
@@ -51,6 +54,9 @@ make toolchain
         fi
     done
 )
+
+# remove download directory, so it will not be part of the created Docker image
+rm -rf output/dl noutput/.git
 
 #test cross compiler
 
