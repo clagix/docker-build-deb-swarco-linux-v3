@@ -56,7 +56,7 @@ make toolchain
 )
 
 # remove download directory, so it will not be part of the created Docker image
-rm -rf output/dl noutput/.git
+rm -rf output/dl output/.git
 
 #test cross compiler
 
