@@ -53,7 +53,7 @@ make
 )
 
 # remove download directory, so it will not be part of the created Docker image
-rm -rf output/dl noutput/.git
+rm -rf output/dl output/.git
 
 #(
     #    tar cJf ../swarco-linux-v2_staging_dir.tar.bz2 buildroot/buildroot-2.0/build_arm/staging_dir
